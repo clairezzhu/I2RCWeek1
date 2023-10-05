@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
+
 public class TankDrive extends CommandBase {
   public DriveTrain dt;
   public Joystick joy;
@@ -17,17 +18,17 @@ public class TankDrive extends CommandBase {
     this.dt = dt;
     this.joy = j;
 
-    // Use addRequirements() here to declare subsystem dependencies.
+    // use requirements
     addRequirements(dt);
   }
 
-  // Called when the command is initially scheduled.
+  // calle dwhen command is shcuedled at first
   @Override
   public void initialize() {
     dt.tankDrive(0.0, 0.0);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
+  // called every time it runs while command is scheduled
   @Override
   public void execute() {
     double leftPowerRaw = joy.getRawAxis(1);
@@ -37,13 +38,13 @@ public class TankDrive extends CommandBase {
     dt.tankDrive(leftPowerRaw*-0.7, rightPowerRaw*-0.7);
   }
 
-  // Called once the command ends or is interrupted.
+  // called when it is end/interrupted
   @Override
   public void end(boolean interrupted) {
     dt.tankDrive(0.0, 0.0);
   }
 
-  // Returns true when the command should end.
+  // returns true when command ends
   @Override
   public boolean isFinished() {
     return false;
