@@ -41,8 +41,8 @@ public class DriveTrain extends SubsystemBase
     leftDriveTalon.setNeutralMode(NeutralMode.Coast);
     rightDriveTalon.setNeutralMode(NeutralMode.Coast);
 
-    leftDriveTalon.setInverted(true);
-    rightDriveTalon.setInverted(false);
+    leftDriveTalon.setInverted(false);
+    rightDriveTalon.setInverted(true);
 
     leftDriveTalon.setSensorPhase(true);
     rightDriveTalon.setSensorPhase(true);
@@ -69,7 +69,11 @@ public class DriveTrain extends SubsystemBase
   public double getTicks() {
     return (leftDriveTalon.getSelectedSensorPosition(0) + rightDriveTalon.getSelectedSensorPosition(0)) / 2.0;
   }
- 
+
+  public double ticksToMeter(){
+    return(0.1524 * Math.PI / 4096 ) * getTicks();
+  }
+
   // gets Angle robot is at
   public double getAngle(){
     return navx.getAngle(); 
@@ -86,6 +90,7 @@ public class DriveTrain extends SubsystemBase
     SmartDashboard.putNumber("Left Voltage", leftDriveTalon.getMotorOutputPercent());
     SmartDashboard.putNumber("Right Voltage", rightDriveTalon.getMotorOutputPercent());
     SmartDashboard.putNumber("Angle", navx.getAngle());
+    SmartDashboard.putNumber("Tickd to Meter", ticksToMeter());
 
     LeftVoltage.setDouble(leftDriveTalon.getMotorOutputPercent());
     RightVoltage.setDouble(rightDriveTalon.getMotorOutputPercent());
