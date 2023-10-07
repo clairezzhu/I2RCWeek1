@@ -19,7 +19,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 import com.kauailabs.navx.frc.AHRS;
-// HELLO
+
+//creates drivetrain class; it inherits atrributes from SubsystemBase class
 public class DriveTrain extends SubsystemBase 
 {
   private final WPI_TalonSRX leftDriveTalon;
@@ -52,29 +53,34 @@ public class DriveTrain extends SubsystemBase
     rightDriveTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 
   }
-
+// it set motor power of both talons
   public void tankDrive(double leftSpeed, double rightSpeed) {
     rightDriveTalon.set(rightSpeed);
     leftDriveTalon.set(leftSpeed);
   }
 
+// reset to inital value of encoders (everytime code run it can be accurately measured)
   public void resetEncoders() {
     leftDriveTalon.setSelectedSensorPosition(0,0,10);
     rightDriveTalon.setSelectedSensorPosition(0,0,10);
   }
 
+  // gets the amount of ticks traveled by encoder and turns them to meters
   public double getTicks() {
     return (leftDriveTalon.getSelectedSensorPosition(0) + rightDriveTalon.getSelectedSensorPosition(0)) / 2.0;
   }
  
+  // gets Angle robot is at
   public double getAngle(){
     return navx.getAngle(); 
   }
  
+  // rest angle everytime code is ran
   public void resetNavx(){
     navx.reset();
   }
 
+  // allows you to see stats while running robot
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Left Voltage", leftDriveTalon.getMotorOutputPercent());

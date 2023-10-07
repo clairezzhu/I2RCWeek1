@@ -27,6 +27,9 @@ public class RobotContainer {
   private final DriveTrain dt = new DriveTrain();
 
   private final TankDrive tankDrive = new TankDrive(dt, joy1);
+  double setpoint = 1.0;
+  private final AutoDrive autoDrive = new AutoDrive(dt, setpoint);
+  
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -55,6 +58,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return null;
+    return autoDrive;
   }
 }
