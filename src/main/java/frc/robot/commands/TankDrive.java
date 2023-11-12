@@ -26,6 +26,7 @@ public class TankDrive extends CommandBase {
   @Override
   public void initialize() {
     dt.tankDrive(0.0, 0.0);
+    dt.resetEncoders();
   }
 
   // called every time it runs while command is scheduled
@@ -42,6 +43,7 @@ public class TankDrive extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     dt.tankDrive(0.0, 0.0);
+    dt.resetEncoders();
   }
 
   // returns true when command ends
